@@ -1,4 +1,17 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class Bogie {
+
+    String name;
+    int capacity;
+
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+}
 
 public class TrainConsistApp {
 
@@ -6,21 +19,19 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        LinkedList<String> trainConsist = new LinkedList<>();
+        List<Bogie> passengerBogies = new ArrayList<>();
 
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
+        passengerBogies.add(new Bogie("Sleeper", 72));
+        passengerBogies.add(new Bogie("AC Chair", 56));
+        passengerBogies.add(new Bogie("First Class", 24));
 
-        trainConsist.add(2, "Pantry Car");
+        passengerBogies.sort(Comparator.comparingInt(b -> b.capacity));
 
-        trainConsist.removeFirst();
-        trainConsist.removeLast();
+        System.out.println("Passenger bogies sorted by seating capacity:");
 
-        System.out.println("Final ordered train consist:");
-        System.out.println(trainConsist);
+        for (Bogie b : passengerBogies) {
+            System.out.println(b.name + " -> Capacity: " + b.capacity);
+        }
 
         System.out.println("Program continues...");
     }
