@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.*;
 
-public class UC8_FilterBogies {
+public class UseCase9TrainConsistMgmt {
 
     static class Bogie {
         String name;
@@ -19,14 +19,16 @@ public class UC8_FilterBogies {
                 new Bogie("Sleeper", 72),
                 new Bogie("AC Chair", 56),
                 new Bogie("First Class", 24),
-                new Bogie("Sleeper", 70)
+                new Bogie("Sleeper", 70),
+                new Bogie("AC Chair", 60)
         );
 
-        List<Bogie> filtered = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        Map<String, List<Bogie>> grouped = bogies.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
 
-        System.out.println("Filtered Bogies:");
-        filtered.forEach(b -> System.out.println(b.name + " - " + b.capacity));
+        grouped.forEach((type, list) -> {
+            System.out.println(type + ":");
+            list.forEach(b -> System.out.println("  " + b.capacity));
+        });
     }
 }
